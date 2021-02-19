@@ -1,7 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 4000
 const routes = require('./routes');
+
+// Middleware
+app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended: false}));
 
 // Home Route
 app.get('/', (req, res) => {

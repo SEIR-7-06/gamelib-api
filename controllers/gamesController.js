@@ -11,19 +11,48 @@ const index = (req, res) => {
 };
 
 const show = (req, res) => {
-  res.send('<h1>Games Show</h1>');
+  // Get Game from DB by ID
+  db.Game.findById(req.params.id, (err, foundGame) => {
+    if (err) return console.log(err);
+
+    // Send back data to client as JSON object
+    res.json(foundGame);
+  });
 };
 
 const create = (req, res) => {
-  res.send('<h1>Games Create</h1>');
+  // console.log(req.body);
+  // Query DB to create a new Game
+  db.Game.create(req.body, (err, newGame) => {
+    if (err) return console.log(err);
+
+    res.json(newGame);
+  });
 };
 
 const update = (req, res) => {
-  res.send('<h1>Games Update</h1>');
+  // console.log('Game to update ID = ', req.params.id);
+  // console.log('Data to update Game = ', req.body);
+
+  db.Game.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {new: true},
+    (err, updatedGame) => {
+      if (err) return console.log(err);
+
+      res.json(updatedGame);
+    }
+  );
 };
 
 const destroy = (req, res) => {
-  res.send('<h1>Games Delete</h1>');
+  // console.log(req.params.id);
+  db.Game.findByIdAndDelete(req.params.id, (err, deletedGame) => {
+    if (err) return console.log(err);
+
+    res.json(deletedGame);
+  });
 };
 
 module.exports = {
