@@ -1,21 +1,13 @@
 const db = require('../models');
 
 const index = (req, res) => {
-  // res.send('<h1>Games Index</h1>');
-
   // Query DB for all games
   db.Game.find({}, (err, allGames) => {
     if (err) return console.log(err);
     
+    // Send back data as JSON object
     res.json(allGames);
-    // res.json({
-    //   numberOfGames: allGames.length,
-    //   responedAt: new Date(),
-    //   games: allGames,
-    //   status: 200,
-    // })
   });
-
 };
 
 const show = (req, res) => {
