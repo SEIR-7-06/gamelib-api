@@ -17,5 +17,10 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.generalassemb.ly/WC-SEIR-1207/gamelib-api.git"
+  },
+  "keywords": []
 }
