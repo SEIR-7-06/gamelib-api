@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const connectionString = process.env.MONGODB_URI || 'mongodb://localhost:27017/gamelib-1207';
+const connectionString = process.env.MONGODB_URI;
 
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
@@ -14,4 +14,5 @@ mongoose.connect(connectionString, {
 
 module.exports = {
   Game: require('./Game'),
+  User: require('./User'),
 };
