@@ -43,12 +43,12 @@ async function create(req, res) {
     //   password: hash
     // };
 
-    const newUser = await db.User.create({...req.body, password: hash});
+    const newUser = await db.User.create({name, email, password: hash});
 
     // Respond back to client
     res.json(newUser);
   } catch (err) {
-    return res.json({status: 500, error: 'Something went wrong. Please try again'});
+      return res.json({status: 500, error: 'Something went wrong. Please try again'});
   }
 }
 

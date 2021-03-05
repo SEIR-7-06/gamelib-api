@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 app.use('/api/v1/games', routes.games);
 // Users API Routes
 app.use('/api/v1/users', routes.users);
+// Auth API Routes
+app.use('/api/v1/auth', routes.auth);
 
 // Listen For Requests
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
