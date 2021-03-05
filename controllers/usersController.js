@@ -9,18 +9,6 @@ async function create(req, res) {
     return res.json({status: 400, message: 'All Fields Are Required'});
   }
 
-  // Verify User Does Not Exist
-  // Callback Version
-  // db.User.findOne({email: email}, (err, foundUser) => {
-  //   if (err) return console.log(err);
-
-  //   if (foundUser) {
-  //     console.log('User account already exists: ', foundUser);
-  //     return res.json({status: 400, error: 'User already exists. Please login'});
-  //   }
-
-  // });
-
   // Asyc/Await Version
   try {
     const foundUser = await db.User.findOne({ email });
@@ -36,13 +24,6 @@ async function create(req, res) {
     // Hash user plain text password
     const hash = await bcrypt.hash(password, salt);
 
-    // Create the new user with hashed password
-    // const userData = {
-    //   name,
-    //   email,
-    //   password: hash
-    // };
-
     const newUser = await db.User.create({name, email, password: hash});
 
     // Respond back to client
@@ -52,6 +33,20 @@ async function create(req, res) {
   }
 }
 
+async function getProfile(req, res) {
+  
+  try {
+    // currentUserId = req.currentUserId
+    // Findy User by ID
+    const user = await db.User.findById(req.currentUserId);
+    return res.json({status: 200, profile: user});
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({status: 500, error: 'Something went wrong. Please try again'});
+  }
+}
+
 module.exports = {
   create,
+  getProfile,
 };
