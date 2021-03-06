@@ -6,7 +6,7 @@ async function create(req, res) {
 
   // Validate create user form inputs
   if (!name || !email || !password) {
-    return res.json({status: 400, message: 'All Fields Are Required'});
+    return res.status(400).json({status: 400, message: 'All Fields Are Required'});
   }
 
   // Asyc/Await Version
@@ -15,7 +15,7 @@ async function create(req, res) {
     
     if (foundUser) {
       console.log('User account already exists: ', foundUser);
-      return res.json({status: 400, error: 'User already exists. Please login'});
+      return res.status(400).json({status: 400, error: 'User already exists. Please login'});
     }
 
     // Create Salt for password hash
@@ -29,7 +29,7 @@ async function create(req, res) {
     // Respond back to client
     res.json(newUser);
   } catch (err) {
-      return res.json({status: 500, error: 'Something went wrong. Please try again'});
+      return res.status(500).json({status: 500, error: 'Something went wrong. Please try again'});
   }
 }
 
